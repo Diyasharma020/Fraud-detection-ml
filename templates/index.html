@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Detection System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #A3B18A; /* Sage Green */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #344E41;
+            margin-bottom: 10px;
+        }
+
+        p.description {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 13px;
+            color: #344E41;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        input:focus {
+            border-color: #588157;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #588157;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3A5A40;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #DAD7CD;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .test-links {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .test-links a {
+            color: #3A5A40;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        .test-links a:hover {
+            text-decoration: underline;
+        }
+
+        .scroll-box {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+            padding-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Fraud Detection System</h1>
+    <p class="description">
+        Random Forest Model | Imbalanced Data Handling | SMOTE Applied
+    </p>
+
+    <form action="/predict" method="post">
+
+        <div class="scroll-box">
+
+            <div class="input-group">
+                <label>Transaction Time</label>
+                <input type="text" name="Time" required>
+            </div>
+
+            {% for i in range(1, 29) %}
+            <div class="input-group">
+                <label>V{{i}}</label>
+                <input type="text" name="V{{i}}" required>
+            </div>
+            {% endfor %}
+
+            <div class="input-group">
+                <label>Transaction Amount</label>
+                <input type="text" name="Amount" required>
+            </div>
+
+        </div>
+
+        <button type="submit">Predict Transaction</button>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+        {{ prediction_text }} <br>
+        {{ probability_text }}
+    </div>
+    {% endif %}
+
+    <div class="test-links">
+        <a href="/test_normal">Test Normal Transaction</a> |
+        <a href="/test_fraud">Test Fraud Transaction</a>
+    </div>
+
+</div>
+
+</body>
+</html>

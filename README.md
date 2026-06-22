@@ -14,5 +14,3 @@ Download the dataset and place `creditcard.csv` inside the `data/` folder before
 - Precision (Fraud Class): 0.87
 - ROC-AUC: 0.91
 
-## Deployment
-The application is deployed using Flask and Gunicorn.
